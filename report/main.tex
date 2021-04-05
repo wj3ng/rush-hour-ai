@@ -1,0 +1,295 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[parfill]{parskip}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in, includefoot, headheight=13.6pt]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{bgColor}{rgb}{0.97, 0.97, 0.97}
+\definecolor{commentsColor}{rgb}{0.497495, 0.497587, 0.497464}
+\definecolor{keywordsColor}{rgb}{0.000000, 0.000000, 0.635294}
+\definecolor{stringColor}{rgb}{0.558215, 0.000000, 0.135316}
+
+\lstset{
+  backgroundcolor=\color{bgColor},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentsColor}\textit,    % comment style
+  columns=fullflexible,
+  frame=tb,	                   	   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{keywordsColor}\bfseries,       % keyword style
+  language=C++,                 % the language of the code (can be overrided per snippet)
+  % otherkeywords={*,...},           % if you want to add more keywords to the set
+  % numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{commentsColor}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{stringColor}, % string literal style
+  %title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
+  columns=fixed                    % Using fixed column width (for e.g. nice alignment)
+}
+
+\begin{document}
+
+\begin{titlepage}
+   \begin{center}
+
+       \vspace*{3cm}
+
+       \Huge
+       \textbf{Analysis of Search Algorithms}
+        
+       \vspace{0.5cm}
+    
+       \LARGE
+       Analysis of \\
+       BFS, DFS, IDS, A*, IDA* \\
+       Using the Rush Hour Puzzle
+
+
+       \vspace{3cm}
+
+       \Large
+       \textbf{Willie Jeng} \\
+       \textbf{109550173}
+
+       \vspace{0.8cm}
+
+       \Large
+       Artificial Intelligence Capstone \\
+       Programming Assignment \#1\\
+       National Yang Ming Chiao Tung University \\
+       4/6/2021
+
+   \end{center} 
+\end{titlepage}
+
+% \pagestyle{empty} %get rid of header/footer for toc page
+% \tableofcontents %put toc in
+% \cleardoublepage %start new page
+% \pagestyle{plain} % put headers/footers back on
+% \setcounter{page}{1} %reset the page counter
+
+\tableofcontents
+
+\section{Introduction}
+
+This report analyzes and compares different search algorithms for problem solving. Given an initial state of a problem, the solution is a sequence of actions performed on the state to reach a ``goal state'' with certain given conditions.
+
+The search algorithms analyzed are breath-first search (BFS), depth-first search (DFS), iterative deepening search (IDS), A* search, and iterative deepening A* search (IDA*). For A* and IDA*, the effectiveness of various heuristic functions will also be analyzed. 
+
+\subsection{The problem}
+
+The toy problem to be used to test the algorithms is a simulation of the Rush Hour puzzle. Given the positions, lengths, and orientations of many cars on a $6\times6$ grid, cars are moved along their orientations to reach the goal state, which is any state where the car of index 0 reaches the position $(2,4)$.
+
+For this problem, an action is moving any car to any legal position. A legal position is any position along a car's orientation, as long as no other car is blocking the movement from the car's start position to end position. Each action has an equal cost, so the optimal solution has the least amount of actions.
+
+\section{Experiment}
+
+The experiment program was written in C++17, compiled using G++ 9.3.0, and run in Ubuntu on the Windows Subsystem for Linux. The entire code can be found in the Appendix. 
+
+\subsection{Simulation of the problem}
+
+The game was simulated using an object-oriented approach with three classes: 
+
+\begin{itemize}
+
+    \item The {\tt Car} class represents a single toy car on the board. The class contains the index, position, length, and orientation of a toy car.
+
+    \item The {\tt Action} class represents movement of a certain toy car to a certain position on the board. It contains the index of the toy car and the new position of said car. All {\tt Action} objects can be assumed to be legal moves as this is tested for before constructing the object.
+
+    \item The {\tt State} class represents a state of the puzzle. It uses both the {\tt Car} and the {\tt Action} classes. The class contains a list of {\tt Car} objects {\tt cars} denoting all the cars on the board, a list of {\tt Action} objects {\tt actions} listing all actions made from the initial state to reach this state, and a $6\times6$ array {\tt occ} noting the index of the car occupying a certain square, or $-1$ if it is unoccupied. {\tt std::vector} is used for implementation of the lists. There are four methods in the {\tt State} class:
+
+    \begin{itemize}
+    
+        \item {\tt bool isGoalState()} performs a simple check on whether car \#0 is in the correct position for a goal state. Time complexity is $O(1)$.
+    
+        \item {\tt bool isLegalAction(Action a)} checks whether the action can be performed on the current state. This method is the main reason for maintaining {\tt occ}. Without {\tt occ}, checking for illegal actions would require looping through all cars, which would give this method a time complexity of $O(N)$ for a state with $N$ cars. Maintaining {\tt occ} only increases memory and time spent performing an action by a constant while reducing this method to $O(1)$ time.
+
+        \item {\tt vector<Action> expandState()} returns a list of actions that can be performed on the current state. This is done by checking if every single action is legal. Some pruning is done by not including actions that do not move any car, and not including actions that involve the last car moved in the state (if two actions are performed consecutively on the same car, they could have been performed as one action). Since the cars can only move on a grid of fixed size, the time complexity of this method is $O(1)$.
+    
+        \item {\tt State performAction(Action a)} returns the state gotten after performing the action on the current state. This method is used for the expansion step of search algorithms, and also runs in $O(1)$ time.
+    
+    \end{itemize}
+
+\end{itemize}
+
+\subsection{Implementation of searches}
+
+All the search algorithms are written in similar fashion, with the data structure used to store the frontier states being the main difference.
+
+The initial state is first added to the frontier. The first state on the frontier is checked for a goal state, and is returned as the solution if it is one. Otherwise, the state is expanded upon, the expanded states are added to the frontier, and the current state is removed from the frontier. 
+
+Graph search is used in the searches, however it can be easily changed to tree search by removing the lines of code related to the explored set (see Appendix). The explored set is implemented as an {\tt std::map}, which is an implementation of a red-black tree. The key is a $6\times6$ array representing the positions of the cars on the board, with the same format as {\tt State.occ}. The value is an {\tt int} representing the least amount of actions performed to reach the key. If a key is reached after an amount of actions that is greater than the value, the state removed from the frontier without being expanded upon. See Observations for analysis on the impact of the explored set on time and memory.
+
+\subsubsection{Breadth-first search}
+
+An {\tt std::queue} is used to store frontier states, which are expanded in order of being added until a goal state is found.
+
+\subsubsection{Depth-first search}
+
+An {\tt std::stack} is used to store frontier states instead of recursion, as {\tt std::stack} uses the heap instead of the thread stack and has a higher limit. 
+
+\subsubsection{Iterative deepening search}
+
+DFS is repeatedly run on the initial state with an increasing maximum depth, starting from $1$, until a solution can be found. To perform DFS with a maximum depth, a state is not expanded upon if its depth exceeds the maximum depth.
+
+\subsubsection{A* search}
+
+An {\tt std::priority\_queue}, which is an implementation of a max heap, is used to store frontier states. The heap is ordered by the costs of the states, which for this problem is defined as the heuristic added to the amount of actions. The states are stored into the priority queue using {\tt HContainer} objects, which also stores the cost in order to avoid having to calculate it multiple times. 
+
+The heuristic function used is the blocking heuristic. The blocking heuristic simply calculates the number of cars blocking the path of car \#0 to the exit. 
+
+\subsubsection{Iterative deepening A* search}
+
+Similar to IDS, but using A*. A* is repeatedly run on the initial state with an increasing maximum cost, starting from 0.
+
+\subsection{Testing}
+
+The metrics used are time, nodes expanded, and the greatest amount of nodes in the frontier at any time. Time is measured in microseconds using {\tt std::chrono}, starting immediately before and ending immediately after the algorithm runs. The other two metrics are updated after every expansion.
+
+To run the tests, a Bash script is used to cycle through all the test cases and algorithms. If a certain case runs for more than 20 seconds, it is timed out. The script outputs to stdout, but can be piped to a file using the command line.
+
+\section{Results \& Observations}
+
+See Appendix for the complete experiment results. 
+
+The maximum depth of the state space $m$ is significantly large. $m$ is infinite if performing tree search, and still large if performing graph search. The maximum branching factor of the search tree $b$ is manageable, as each car can only have at most five possible actions at any state. The depth of the optimal solution $d$ is also manageable, which makes sense for a game meant to be able to be solved by hand.
+
+\subsection{Comparison of the algorithms}
+
+The experiment results mostly reflected the advantages and drawbacks of each algorithm mentioned in the lectures. However, it became apparent that some algorithms were better in every way than others for this specific problem.
+
+BFS is a relatively effective algorithm for solving the Rush Hour puzzle. The space and time complexities for BFS are both $O(b^d$), which is manageable. The cost of any action is equal, which gives this problem unit step costs. Because of the unit step costs, BFS gives an optimal solution.
+
+DFS is ineffective for this problem compared to the other algorithms. Because of the large $m$, the $O(b^m)$ time complexity is highly ineffective. This can be seen in the results, as the time taken for DFS is significantly longer than the others, many cases even timing out before it can be finished. For graph search, DFS is complete even if it takes a long time, but if using tree search, DFS can easily fall into an infinite loop. The solution from DFS may also not be optimal, and for many cases, the solution has many times the amount of actions of an optimal solution. The advantage of DFS should be its space complexity of $O(mb)$. However, because of the large $m$, the number of nodes in the memory is often greater than that of BFS.
+
+IDS is slightly more favorable than DFS, but is also inefficient for this problem. IDS has a time complexity of $O(b^d)$, which is more slightly more efficient than DFS, which has a time complexity of $O(b^m)$. However, it can take more time than DFS at times, since it performs the search multiple times with different maximum depths, and for some cases, IDS times out while DFS does not. Despite this, IDS gives an optimal solution because of the unit step costs, and is complete since $d$ is finite.
+
+A* has the same efficiency as BFS for tree and graph traversal, but can reach a goal state faster with its heuristic function. However, inserting a state into the heap takes $O(\lg n)$ time, and it takes almost twice as long to run than BFS for most cases. It requires slightly fewer nodes to be expanded than BFS, showing the impact of the heuristic function.
+
+Although having the same time complexity as A*, IDA* takes more time because it runs A* multiple times at increasing maximum costs. The advantage for IDA* is the space complexity. This can be seen in the experiment results, but the maximum amount of nodes in the memory is not reduced at all for some test cases. This was because IDA* saves memory by not adding new states over a certain cost into the heap, but for some cases no states were omitted because of its cost before a solution was found.
+
+\subsection{Analysis of the heuristic function}
+
+The number of actions needed to bring a state to a goal state is always greater or equal to the number of cars blocking car \#0 from the exit. This is because to it takes at least one action to move each car blocking car \#0 out of the way. Therefore, the heuristic is always less than or equal to the true cost, making it admissible. However this can only guarantee optimality for tree search.
+
+In order for a heuristic to be consistent and be optimal for graph search, it needs to satisfy the triangle equality: $h(n) \leq c(n,a,n') + h(n')$, $n$ being the current state and $n'$ being the state after performing an action $a$ on $n$. The costs for all actions for this problem are the same, which would be assumed to be $1$. The triangle equality can now be written as $h(n) - h(n') \leq 1$, meaning each action can only improve the heuristic by at most one. This applies to the blocking heuristic, as each action can move at most one car out of the exiting path.
+
+\subsection{Tree search vs. graph search}
+
+The tests were done using graph search, with the main reason being that tree search would be significantly slower and testing it for all test cases would be unrealistic. DFS is not complete for tree search, and tree search with DFS always resulted in the program being stuck at an endless loop of the same cars moving back and forth.
+
+The minimum depth of a state for a certain board position had to be stored in the explored set in order for DFS and IDS to run correctly. If the minimum depth was not stored, states of lower depth would not be able to expand if states of high depth had already reached the same board position, which would make IDS not optimal. Therefore, an {\tt std::map} was required for DFS and IDS. For BFS, since all states of a lower depth would be expanded before a higher depth, the value of the positions in the explored set would always be less than or equal to the current depth if it existed, and so an {\tt std::set} could have been used, which would have been slightly faster, although having the same time complexity for lookup. However, a {\tt std::map} was used for all algorithms for consistency in time calculations.
+
+\section{Remaining Questions}
+
+Randomness could have been an interesting factor in searching. For example, for DFS, would adding new states to the frontier in a random order decrease the chance of running into an infinite loop before finding a solution?
+
+The blocking heuristic reduced the amount of nodes expanded, but the additional time of the heap made A* take more time than BFS in most cases. If a heuristic function could be devised that can better estimate the cost of a state, A* and IDA* could be made more effective.
+
+\section{Conclusion}
+
+By measuring the time, the amount of nodes expanded, and the maximum amount of nodes in the frontier for many test cases using different algorithms, it could be seen that BFS performed the best out of these algorithms in both time and space. However, A* and IDA* could potentially perform better with a different heuristic function. DFS and IDS were not effective algorithms for this problem because of the sizes of the problem's branching factor and depth.
+
+\pagebreak
+
+\appendix
+
+\section{Program Structure}
+
+\lstinputlisting{../structure.txt}
+
+\section{Program Code}
+
+\subsection{Compiling and running the program}
+
+For Linux:
+
+\begin{itemize}
+    \item To compile the code, run {\tt g++ src/*.cpp} in the root directory.
+
+    \item To run the program, run {\tt ./a.out} in the root directory. The program takes two arguments.
+    \begin{itemize}
+        \item The first argument is a number corresponding to the algorithm.
+        \begin{enumerate}
+            \item BFS
+            \item DFS
+            \item IDS
+            \item A*
+            \item IDA*
+        \end{enumerate}
+        \item The second argument is the filename of the test case inside {\tt tests/}.
+    \end{itemize}
+
+    \item To test for all algorithms for all cases in {\tt tests/}, run {\tt chmod +x ./test.sh} then {\tt ./test.sh} in the root directory. The timeout time can be changed by changing {\tt TOTIME}.
+
+\end{itemize}
+
+\subsection{{\tt car.hpp}}
+\lstinputlisting{../src/car.hpp}
+
+\subsection{{\tt action.hpp}}
+\lstinputlisting{../src/action.hpp}
+
+\subsection{{\tt state.hpp}}
+\lstinputlisting{../src/state.hpp}
+
+\subsection{{\tt heuristic.hpp}}
+\lstinputlisting{../src/heuristic.hpp}
+
+\subsection{{\tt searches.hpp}}
+\lstinputlisting{../src/searches.hpp}
+
+\subsection{{\tt car.cpp}}
+\lstinputlisting{../src/car.cpp}
+
+\subsection{{\tt action.cpp}}
+\lstinputlisting{../src/action.cpp}
+
+\subsection{{\tt state.cpp}}
+\lstinputlisting{../src/state.cpp}
+
+\subsection{{\tt heuristic.cpp}}
+\lstinputlisting{../src/heuristic.cpp}
+
+\subsection{{\tt bfs.cpp}}
+\lstinputlisting{../src/bfs.cpp}
+
+\subsection{{\tt dfs.cpp}}
+\lstinputlisting{../src/dfs.cpp}
+
+\subsection{{\tt ids.cpp}}
+\lstinputlisting{../src/ids.cpp}
+
+\subsection{{\tt aStar.cpp}}
+\lstinputlisting{../src/aStar.cpp}
+
+\subsection{{\tt idaStar.cpp}}
+\lstinputlisting{../src/idaStar.cpp}
+
+\subsection{{\tt main.cpp}}
+\lstinputlisting{../src/main.cpp}
+
+\subsection{{\tt test.sh}}
+\lstinputlisting[language=bash]{../test.sh}
+
+\section{Complete Results}
+\lstinputlisting[language=bash]{../results.txt}
+
+\section{Link to Complete Project}
+
+The complete project files can be found at:
+
+\url{https://github.com/wj3ng/rush-hour-ai}
+
+\end{document}

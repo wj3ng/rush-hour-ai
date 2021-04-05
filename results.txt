@@ -1,0 +1,540 @@
+L01.txt, BFS
+           8  actions in solution
+      104546  microseconds elapsed
+        1057  nodes expanded
+        2477  nodes in memory
+
+L01.txt, DFS
+         995  actions in solution
+      397060  microseconds elapsed
+        1203  nodes expanded
+        7197  nodes in memory
+
+L01.txt, IDS
+           8  actions in solution
+      908179  microseconds elapsed
+       11920  nodes expanded
+          68  nodes in memory
+
+L01.txt, A*
+           8  actions in solution
+      166871  microseconds elapsed
+         952  nodes expanded
+        2924  nodes in memory
+
+L01.txt, IDA*
+           8  actions in solution
+      342034  microseconds elapsed
+        2444  nodes expanded
+        2837  nodes in memory
+
+L02.txt, BFS
+           8  actions in solution
+      197713  microseconds elapsed
+        2525  nodes expanded
+        6900  nodes in memory
+
+L02.txt, DFS
+        1696  actions in solution
+      797288  microseconds elapsed
+        1705  nodes expanded
+       12767  nodes in memory
+
+L02.txt, IDS
+           8  actions in solution
+     1087492  microseconds elapsed
+       15534  nodes expanded
+          66  nodes in memory
+
+L02.txt, A*
+           8  actions in solution
+      156282  microseconds elapsed
+        1108  nodes expanded
+        4840  nodes in memory
+
+L02.txt, IDA*
+           8  actions in solution
+      175308  microseconds elapsed
+        1790  nodes expanded
+        2737  nodes in memory
+
+L03.txt, BFS
+          14  actions in solution
+       56103  microseconds elapsed
+         774  nodes expanded
+        1548  nodes in memory
+
+L03.txt, DFS
+         647  actions in solution
+     1383368  microseconds elapsed
+        7902  nodes expanded
+        3521  nodes in memory
+
+L03.txt, IDS
+          14  actions in solution
+     1515193  microseconds elapsed
+       21846  nodes expanded
+          87  nodes in memory
+
+L03.txt, A*
+          14  actions in solution
+       92726  microseconds elapsed
+         627  nodes expanded
+        1458  nodes in memory
+
+L03.txt, IDA*
+          14  actions in solution
+      431998  microseconds elapsed
+        3603  nodes expanded
+         877  nodes in memory
+
+L04.txt, BFS
+           9  actions in solution
+       19281  microseconds elapsed
+         340  nodes expanded
+         840  nodes in memory
+
+L04.txt, DFS
+         130  actions in solution
+        8581  microseconds elapsed
+         154  nodes expanded
+         638  nodes in memory
+
+L04.txt, IDS
+           9  actions in solution
+      109800  microseconds elapsed
+        2097  nodes expanded
+          33  nodes in memory
+
+L04.txt, A*
+           9  actions in solution
+       23531  microseconds elapsed
+         234  nodes expanded
+         801  nodes in memory
+
+L04.txt, IDA*
+           9  actions in solution
+       41527  microseconds elapsed
+         543  nodes expanded
+         460  nodes in memory
+
+L10.txt, BFS
+          17  actions in solution
+      149403  microseconds elapsed
+        1977  nodes expanded
+        1870  nodes in memory
+
+L10.txt, DFS
+        1320  actions in solution
+     5024195  microseconds elapsed
+       26928  nodes expanded
+        7725  nodes in memory
+
+L10.txt, IDS
+          17  actions in solution
+     4052032  microseconds elapsed
+       57051  nodes expanded
+          87  nodes in memory
+
+L10.txt, A*
+          17  actions in solution
+      308105  microseconds elapsed
+        1662  nodes expanded
+        2280  nodes in memory
+
+L10.txt, IDA*
+          17  actions in solution
+     1669074  microseconds elapsed
+       10803  nodes expanded
+        2280  nodes in memory
+
+L11.txt, BFS
+          25  actions in solution
+       52944  microseconds elapsed
+         829  nodes expanded
+         572  nodes in memory
+
+L11.txt, DFS
+         466  actions in solution
+     2613890  microseconds elapsed
+       18259  nodes expanded
+        1923  nodes in memory
+
+L11.txt, IDS
+          25  actions in solution
+     5176309  microseconds elapsed
+       75058  nodes expanded
+          68  nodes in memory
+
+L11.txt, A*
+          25  actions in solution
+      102318  microseconds elapsed
+         756  nodes expanded
+         668  nodes in memory
+
+L11.txt, IDA*
+          25  actions in solution
+     1007575  microseconds elapsed
+        8420  nodes expanded
+         668  nodes in memory
+
+L20.txt, BFS
+          10  actions in solution
+      117642  microseconds elapsed
+        1557  nodes expanded
+        4261  nodes in memory
+
+L20.txt, DFS
+Timed out after 20 seconds
+
+L20.txt, IDS
+          10  actions in solution
+      517978  microseconds elapsed
+       10019  nodes expanded
+          49  nodes in memory
+
+L20.txt, A*
+          10  actions in solution
+       73042  microseconds elapsed
+         664  nodes expanded
+        2364  nodes in memory
+
+L20.txt, IDA*
+          10  actions in solution
+      131643  microseconds elapsed
+        1666  nodes expanded
+        1890  nodes in memory
+
+L21.txt, BFS
+          21  actions in solution
+       11758  microseconds elapsed
+         257  nodes expanded
+         144  nodes in memory
+
+L21.txt, DFS
+         163  actions in solution
+       36307  microseconds elapsed
+         485  nodes expanded
+         514  nodes in memory
+
+L21.txt, IDS
+          21  actions in solution
+      697712  microseconds elapsed
+       17073  nodes expanded
+          77  nodes in memory
+
+L21.txt, A*
+          21  actions in solution
+       22177  microseconds elapsed
+         248  nodes expanded
+         144  nodes in memory
+
+L21.txt, IDA*
+          21  actions in solution
+      195526  microseconds elapsed
+        2577  nodes expanded
+         144  nodes in memory
+
+L22.txt, BFS
+          26  actions in solution
+      308361  microseconds elapsed
+        3459  nodes expanded
+        4225  nodes in memory
+
+L22.txt, DFS
+        3856  actions in solution
+     9304190  microseconds elapsed
+       12493  nodes expanded
+       25416  nodes in memory
+
+L22.txt, IDS
+          26  actions in solution
+     7527686  microseconds elapsed
+      102774  nodes expanded
+         107  nodes in memory
+
+L22.txt, A*
+          26  actions in solution
+      549960  microseconds elapsed
+        3078  nodes expanded
+        4549  nodes in memory
+
+L22.txt, IDA*
+          26  actions in solution
+     2096610  microseconds elapsed
+       15741  nodes expanded
+        3919  nodes in memory
+
+L23.txt, BFS
+          29  actions in solution
+      183812  microseconds elapsed
+        2379  nodes expanded
+        2645  nodes in memory
+
+L23.txt, DFS
+        2898  actions in solution
+     5243704  microseconds elapsed
+        6719  nodes expanded
+       14511  nodes in memory
+
+L23.txt, IDS
+          29  actions in solution
+     4426338  microseconds elapsed
+       65771  nodes expanded
+         102  nodes in memory
+
+L23.txt, A*
+          29  actions in solution
+      274461  microseconds elapsed
+        1647  nodes expanded
+        1836  nodes in memory
+
+L23.txt, IDA*
+          29  actions in solution
+     1209520  microseconds elapsed
+        9251  nodes expanded
+        1604  nodes in memory
+
+L24.txt, BFS
+          25  actions in solution
+      504968  microseconds elapsed
+        4341  nodes expanded
+        6151  nodes in memory
+
+L24.txt, DFS
+Timed out after 20 seconds
+
+L24.txt, IDS
+Timed out after 20 seconds
+
+L24.txt, A*
+          25  actions in solution
+      962409  microseconds elapsed
+        4211  nodes expanded
+        7320  nodes in memory
+
+L24.txt, IDA*
+          25  actions in solution
+    13984248  microseconds elapsed
+       62349  nodes expanded
+        7320  nodes in memory
+
+L25.txt, BFS
+          27  actions in solution
+      909536  microseconds elapsed
+        8474  nodes expanded
+        7411  nodes in memory
+
+L25.txt, DFS
+        5298  actions in solution
+     7911914  microseconds elapsed
+        5479  nodes expanded
+       33724  nodes in memory
+
+L25.txt, IDS
+Timed out after 20 seconds
+
+L25.txt, A*
+          27  actions in solution
+     2038566  microseconds elapsed
+        7333  nodes expanded
+        9972  nodes in memory
+
+L25.txt, IDA*
+          27  actions in solution
+    12499027  microseconds elapsed
+       54530  nodes expanded
+        9972  nodes in memory
+
+L26.txt, BFS
+          28  actions in solution
+      623361  microseconds elapsed
+        4699  nodes expanded
+        3557  nodes in memory
+
+L26.txt, DFS
+        2044  actions in solution
+     4937732  microseconds elapsed
+       12380  nodes expanded
+       11597  nodes in memory
+
+L26.txt, IDS
+Timed out after 20 seconds
+
+L26.txt, A*
+          28  actions in solution
+      922575  microseconds elapsed
+        4071  nodes expanded
+        4012  nodes in memory
+
+L26.txt, IDA*
+          28  actions in solution
+     7079796  microseconds elapsed
+       41392  nodes expanded
+        4012  nodes in memory
+
+L27.txt, BFS
+          28  actions in solution
+      183905  microseconds elapsed
+        2660  nodes expanded
+        1506  nodes in memory
+
+L27.txt, DFS
+        1287  actions in solution
+      363480  microseconds elapsed
+        1372  nodes expanded
+        6033  nodes in memory
+
+L27.txt, IDS
+          28  actions in solution
+     8818802  microseconds elapsed
+      139577  nodes expanded
+         102  nodes in memory
+
+L27.txt, A*
+          28  actions in solution
+      347690  microseconds elapsed
+        2428  nodes expanded
+        1598  nodes in memory
+
+L27.txt, IDA*
+          28  actions in solution
+     2286392  microseconds elapsed
+       17859  nodes expanded
+        1598  nodes in memory
+
+L28.txt, BFS
+          30  actions in solution
+      161958  microseconds elapsed
+        1923  nodes expanded
+        1726  nodes in memory
+
+L28.txt, DFS
+        1628  actions in solution
+    16838736  microseconds elapsed
+       25662  nodes expanded
+        9676  nodes in memory
+
+L28.txt, IDS
+          30  actions in solution
+     3978030  microseconds elapsed
+       69116  nodes expanded
+         109  nodes in memory
+
+L28.txt, A*
+          30  actions in solution
+      240870  microseconds elapsed
+        1538  nodes expanded
+        2324  nodes in memory
+
+L28.txt, IDA*
+          30  actions in solution
+     1030018  microseconds elapsed
+        8931  nodes expanded
+        2270  nodes in memory
+
+L29.txt, BFS
+          31  actions in solution
+      458803  microseconds elapsed
+        4327  nodes expanded
+        2892  nodes in memory
+
+L29.txt, DFS
+Timed out after 20 seconds
+
+L29.txt, IDS
+Timed out after 20 seconds
+
+L29.txt, A*
+          31  actions in solution
+      901143  microseconds elapsed
+        4289  nodes expanded
+        3295  nodes in memory
+
+L29.txt, IDA*
+          31  actions in solution
+    12596793  microseconds elapsed
+       56728  nodes expanded
+        3295  nodes in memory
+
+L30.txt, BFS
+          32  actions in solution
+      106944  microseconds elapsed
+        1163  nodes expanded
+         718  nodes in memory
+
+L30.txt, DFS
+         871  actions in solution
+      517948  microseconds elapsed
+        1604  nodes expanded
+        3785  nodes in memory
+
+L30.txt, IDS
+          32  actions in solution
+     5871510  microseconds elapsed
+       87934  nodes expanded
+         102  nodes in memory
+
+L30.txt, A*
+          32  actions in solution
+      179646  microseconds elapsed
+        1077  nodes expanded
+         720  nodes in memory
+
+L30.txt, IDA*
+          32  actions in solution
+     1281643  microseconds elapsed
+       10906  nodes expanded
+         720  nodes in memory
+
+L31.txt, BFS
+          37  actions in solution
+      412665  microseconds elapsed
+        3975  nodes expanded
+        2287  nodes in memory
+
+L31.txt, DFS
+Timed out after 20 seconds
+
+L31.txt, IDS
+Timed out after 20 seconds
+
+L31.txt, A*
+          37  actions in solution
+      782316  microseconds elapsed
+        3865  nodes expanded
+        2632  nodes in memory
+
+L31.txt, IDA*
+          37  actions in solution
+     9864524  microseconds elapsed
+       52860  nodes expanded
+        2632  nodes in memory
+
+L40.txt, BFS
+          51  actions in solution
+      421974  microseconds elapsed
+        3024  nodes expanded
+        2136  nodes in memory
+
+L40.txt, DFS
+        1584  actions in solution
+      670278  microseconds elapsed
+        1684  nodes expanded
+        8213  nodes in memory
+
+L40.txt, IDS
+Timed out after 20 seconds
+
+L40.txt, A*
+          51  actions in solution
+      520607  microseconds elapsed
+        2806  nodes expanded
+        2475  nodes in memory
+
+L40.txt, IDA*
+          51  actions in solution
+     6940203  microseconds elapsed
+       43861  nodes expanded
+        2423  nodes in memory
+

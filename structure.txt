@@ -1,0 +1,22 @@
+src/
+    car.hpp
+    action.hpp
+    state.hpp
+    heuristic.hpp
+    searches.hpp
+    car.cpp
+    action.cpp
+    state.cpp
+    heuristic.cpp
+    bfs.cpp
+    dfs.cpp
+    ids.cpp
+    aStar.cpp
+    idaStar.cpp
+    main.cpp
+tests/
+    L01.txt
+    L02.txt
+    ...
+    L40.txt
+test.sh
